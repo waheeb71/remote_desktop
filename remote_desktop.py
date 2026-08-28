@@ -277,7 +277,7 @@ def main():
     
     # User info with horror style
     print_colored("☠ SACRIFICE INFORMATION:", "blood")
-    print_colored(f"  USER     : waheeb", "red")
+    print_colored(f"  USER     : bunyanbank", "red")
     print_colored(f"  PASSWORD : 123", "dark_red")
     print_colored(f"  TIME     : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", "blood")
     
