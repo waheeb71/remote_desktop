@@ -4,7 +4,7 @@
 """
 REMOTE DESKTOP ACTIVATION TOOL - HORROR THEME
 Author: waheeb
-Version: 2.0 - Dark Horror Edition
+Version: 2.0 - Dark Horror Edition (Ultra Fast Mode)
 """
 
 import time
@@ -51,8 +51,8 @@ SKULL_ART = """
     ╚═══════════════════════════════════════════════════════╝
 """
 
-def print_horror(text, color="red", delay=0.01):
-    """Print text with horror style - character by character"""
+def print_horror(text, color="red", delay=0.001):
+    """Print text with horror style - fast character print"""
     colors = {
         "red": "\033[91m",
         "dark_red": "\033[31m",
@@ -67,20 +67,16 @@ def print_horror(text, color="red", delay=0.01):
         "reset": "\033[0m"
     }
     
-    # Random flicker effect
     for char in text:
         sys.stdout.write(f"{colors.get(color, '')}{char}{colors['reset']}")
         sys.stdout.flush()
-        if random.random() < 0.1:  # 10% chance of flicker
-            time.sleep(random.uniform(0.03, 0.8))
-        else:
+        if delay > 0:
             time.sleep(delay)
     print()
 
 def print_skull():
     """Print skull with blood effect"""
     print_colored(SKULL_ART, "blood")
-    time.sleep(0.5)
 
 def print_colored(text, color="red", bold=False):
     """Print colored text"""
@@ -106,20 +102,15 @@ def horror_header():
     
     # Blood drip effect
     print_colored("░" * 80, "blood")
-    time.sleep(0.1)
     print_colored("▒" * 80, "dark_red")
-    time.sleep(0.1)
     print_colored("▓" * 80, "red")
-    time.sleep(0.1)
     print_colored("█" * 80, "dark_red")
-    time.sleep(0.2)
     
-    print_horror(HORROR_ART, "blood", 0.001)
+    print_horror(HORROR_ART, "blood", 0.0005)
     
     # Glitch effect lines
     for _ in range(3):
         print_colored("▒" * random.randint(20, 60), "dark_red")
-        time.sleep(0.05)
     
     print_colored("=" * 80, "blood")
     print_colored("  WELCOME TO THE DARK REMOTE DESKTOP  ", "red", True)
@@ -127,47 +118,28 @@ def horror_header():
     print_colored("=" * 80, "blood")
     print()
 
-def simulate_horror_loading(tool_name, duration=1.0):
-    """Simulate loading with horror effects"""
+def simulate_horror_loading(tool_name, duration=0.05):
+    """Simulate loading with horror effects quickly"""
     print_colored("☠ LOADING:", "blood")
-    print_horror(f"   {tool_name.upper()}...", "red", 0.03)
+    print_horror(f"   {tool_name.upper()}...", "red", 0.002)
     
-    steps = 30
+    steps = 15
     for i in range(steps + 1):
         progress = int((i / steps) * 100)
-        
-        # Random corruption in progress bar
-        if random.random() < 0.05:
-            bar = "╳" * i + "░" * (steps - i)
-        elif random.random() < 0.1:
-            bar = "☠" * i + "░" * (steps - i)
-        else:
-            bar = "█" * i + "░" * (steps - i)
-        
-        # Random flicker
-        if random.random() < 0.03:
-            sys.stdout.write(f"\r   [{bar}] {progress}%  ☠")
-        else:
-            sys.stdout.write(f"\r   [{bar}] {progress}%")
+        bar = "█" * i + "░" * (steps - i)
+        sys.stdout.write(f"\r   [{bar}] {progress}%")
         sys.stdout.flush()
-        
-        # Random delay for suspense
-        if random.random() < 0.02:
-            time.sleep(random.uniform(0.1, 0.5))
-        else:
+        if duration > 0:
             time.sleep(duration / steps)
     
     print()
     print_colored("☠ LOADED SUCCESSFULLY!", "green")
     print_colored("   (OR IS IT?...)  ", "dark_red")
-    time.sleep(0.5)
 
 def check_prerequisites():
     """Check system with horror theme"""
     print_colored("☠ SCANNING THE ABYSS...", "blood")
-    time.sleep(0.5)
     
-    # Random "scary" messages
     scary_messages = [
         "DETECTING SOULS...",
         "ANALYZING DARK ENERGY...",
@@ -177,8 +149,7 @@ def check_prerequisites():
     ]
     
     for msg in random.sample(scary_messages, 2):
-        print_horror(f"   {msg}", "dark_red", 0.05)
-        time.sleep(0.3)
+        print_horror(f"   {msg}", "dark_red", 0.002)
     
     try:
         subprocess.run(["systemctl", "--version"], 
@@ -210,11 +181,10 @@ def main():
     
     # Print skull
     print_skull()
-    time.sleep(0.5)
     
     # Evil intro
     print_colored("☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠", "blood")
-    print_horror("  THE RITUAL BEGINS...", "red", 0.1)
+    print_horror("  THE RITUAL BEGINS...", "red", 0.005)
     print_colored("☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠", "blood")
     print()
     
@@ -246,17 +216,12 @@ def main():
     print_colored("☠" * 60, "dark_red")
     print()
     
-    # Simulate loading with horror
+    # Simulate loading with horror - fast
     total_tools = len(tools)
     for idx, tool in enumerate(tools, 1):
         print_colored(f"[{idx}/{total_tools}] ☠ {display_evil_message()}", "dark_red")
-        simulate_horror_loading(tool, duration=random.uniform(1.0, 2.5))
+        simulate_horror_loading(tool, duration=0.02)
         print()
-        
-        # Random creepiness
-        if random.random() < 0.3:
-            print_colored("   ☠ A SHADOW PASSES...", "blood")
-            time.sleep(0.5)
     
     print_colored("☠" * 60, "blood")
     print_colored("☠ ALL TOOLS HAVE BEEN SUMMONED!", "green")
@@ -265,12 +230,11 @@ def main():
     
     # Execute the ritual
     print_colored("☠ CASTING THE ACTIVATION SPELL...", "blood")
-    time.sleep(0.5)
     
     print_colored("☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠", "dark_red")
-    print_horror("  ABRAHADABRA...", "red", 0.1)
-    print_horror("  SIM SALABIM...", "red", 0.1)
-    print_horror("  HOCUS POCUS...", "red", 0.1)
+    print_horror("  ABRAHADABRA...", "red", 0.005)
+    print_horror("  SIM SALABIM...", "red", 0.005)
+    print_horror("  HOCUS POCUS...", "red", 0.005)
     print_colored("☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠☠", "dark_red")
     print()
     
@@ -328,8 +292,7 @@ def main():
     ]
     
     for msg in random.sample(final_messages, 3):
-        print_horror(f"   ☠ {msg}", "blood", 0.05)
-        time.sleep(0.5)
+        print_horror(f"   ☠ {msg}", "blood", 0.005)
     
     print()
     print_colored("☠" * 80, "blood")
